@@ -1,0 +1,112 @@
+/* login.css */
+
+.login-container {
+  width: 100%;
+  max-width: 380px;
+  margin: 6rem auto;
+  padding: 2rem;
+  background:#fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #111827;
+}
+
+.login-container h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.login-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-input-container button {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #111827;
+  transition: 0.3s ease;
+}
+
+.login-input-container button:hover {
+  background: #f9fafb;
+}
+
+.login-input-container input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.login-otp label{
+  margin-top: 2rem;
+  color: #fff;
+}
+
+.login-input-container input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.login-get-otp-btn {
+  margin-top: 1.5rem;
+  color:white;
+}
+
+.login-get-otp-btn{
+  display: flex;
+  gap:1rem
+}
+.login-get-otp-btn button {
+  display:flex;
+  gap:1rem;
+  justify-content: space-evenly;
+  padding: 0.85rem 1rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+.login-get-otp-btn button:hover {
+  background: #1e4ed8;
+}
+
+.login-get-otp-btn button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container {
+    margin: 3rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .login-input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .login-input-container button {
+    width: 100%;
+  }
+}
