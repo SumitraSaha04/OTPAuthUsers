@@ -1,0 +1,88 @@
+/* Container */
+.listing-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+ }
+
+.listing-container h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #333;
+}
+
+/* Grid layout */
+.listings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+/* Individual card */
+.listing-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.listing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+}
+
+/* Image styling */
+.listing-card img {
+  width: 100%;
+  height: 400px;
+  object-fit:fill;
+  display: block;
+}
+
+/* Text */
+.listing-card h3 {
+  font-size: 20px;
+  margin: 15px 12px 5px;
+  color: #222;
+}
+
+.listing-card p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 12px 15px;
+  color: #666;
+}
+/* Explore Hotel Button */
+#explore-hotel {
+  display: inline-block;
+  justify-content: center;
+   align-items: center;
+   width:100%;
+  padding: 12px 140px;
+  background:#E63946;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#explore-hotel:hover {
+  background: linear-gradient(135deg, #8b3a3a, #961313);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+#explore-hotel:active {
+  transform: scale(0.98);
+}
+
+
+

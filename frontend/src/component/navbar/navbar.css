@@ -1,0 +1,42 @@
+/* Main container */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;          /* white background */
+  padding: 12px 24px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+  position: sticky;                /* stays on top */
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo / brand */
+.navbar-logo a{
+  
+}
+.navbar-container > a {
+  flex:1;
+  font-size: 22px;
+  font-weight: bold;
+  color: #e63946;   /* red shade */
+  text-decoration: none;
+}
+
+/* Links container */
+.navbar-links {
+  display: flex;
+  gap: 20px;  /* spacing between links */
+}
+
+/* Each link */
+.navbar-links a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect */
+.navbar-links a:hover {
+  color: #e63946;
+}

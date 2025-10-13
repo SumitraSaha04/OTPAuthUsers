@@ -1,0 +1,66 @@
+/* newlist.css */
+
+.newlist-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.newlist-container h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.newlist-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.newlist-inputs label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+.newlist-inputs input {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.newlist-inputs input:focus {
+  border: 1px solid #007bff;
+  box-shadow: 0px 0px 6px rgba(0, 123, 255, 0.4);
+}
+
+.add-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background:  #E63946;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #E63946,red );
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+}

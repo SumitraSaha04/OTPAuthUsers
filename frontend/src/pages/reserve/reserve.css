@@ -1,0 +1,98 @@
+/* Background & Center Layout */
+
+
+.reserve-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9fafb;
+}
+
+/* Card */
+.reserve-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Title */
+.reserve-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Hotel Details Layout */
+.reserve-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .reserve-details {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Hotel Image */
+.reserve-image {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Text */
+.reserve-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.reserve-info p {
+  font-size: 14px;
+  color: #555;
+  margin: 6px 0;
+}
+
+/* Price */
+.reserve-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-top: 12px;
+}
+
+/* Action Button */
+.reserve-action {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.reserve-btn {
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.reserve-btn:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
+}

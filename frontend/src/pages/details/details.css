@@ -1,0 +1,145 @@
+/* Container */
+.details-container {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: stretch; /* ensures both sides are equal height */
+}
+
+/* Action buttons top-right */
+.action-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.edit-btn {
+  background: #3498db;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #2980b9;
+}
+
+.delete-btn {
+  background: #5a2e0c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #3e1f07;
+}
+
+/* Image */
+.image-container img {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #f8f8f8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Info section with flex */
+.details-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes reserve button to bottom */
+}
+
+/* Title */
+.details-info h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* Price */
+.price h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #27ae60;
+  margin: 0 0 20px 0;
+}
+
+/* ✅ Google Map Styling */
+.map-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  background: #f4f6f8; /* fallback before map loads */
+  transition: all 0.3s ease;
+}
+
+.map-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Reserve Button */
+.reserve-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #e63946;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.reserve-btn:hover {
+  background: rgb(215, 100, 100);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .details-container {
+    grid-template-columns: 1fr;
+  }
+
+  .reserve-btn {
+    margin-top: 15px;
+  }
+
+  .action-buttons {
+    position: static;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+}
