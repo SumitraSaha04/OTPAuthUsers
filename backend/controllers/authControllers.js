@@ -27,9 +27,10 @@ export const signup = async (req, res) => {
         email: newUser?.email,
         phoneNumber: newUser?.phoneNumber,
         _id: newUser?._id,
+        isAdmin:newUser?.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "5m" }
+      { expiresIn: "1h" }
     );
 
     //Now generate Refresh Token
@@ -38,9 +39,10 @@ export const signup = async (req, res) => {
         email: newUser?.email,
         phoneNumber: newUser?.phoneNumber,
         _id:newUser?._id,
+        isAdmin:newUser?.isAdmin,
       },
       process.env.JWT_REFRESH_KEY,
-      { expiresIn: "7m" }
+      { expiresIn: "1d" }
     );
 
     res.header("Access-Control-Allow-Credentials", "true");
@@ -62,7 +64,8 @@ export const signup = async (req, res) => {
     res.status(201).json({ message: "Registered Successfully", success: true,user:{
      email: newUser?.email,
      userId:newUser?._id,
-     phoneNumber:newUser?.phoneNumber
+     phoneNumber:newUser?.phoneNumber,
+     isAdmin:newUser?.isAdmin,
 
     }});
   } catch (err) {
@@ -100,9 +103,10 @@ export const login = async (req, res) => {
         email: existingUser?.email,
         phoneNumber: existingUser?.phoneNumber,
         _id: existingUser?._id,
+        isAdmin:existingUser?.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "5m" }
+      { expiresIn: "1h" }
     );
 
     //Now generate Refresh Token
@@ -111,9 +115,10 @@ export const login = async (req, res) => {
         email: existingUser?.email,
         phoneNumber: existingUser?.phoneNumber,
         _id: existingUser?._id,
+        isAdmin:existingUser?.isAdmin,
       },
       process.env.JWT_REFRESH_KEY,
-      { expiresIn: "7m" }
+      { expiresIn: "1d" }
     );
 
     res.header("Access-Control-Allow-Credentials", "true");
@@ -138,6 +143,7 @@ export const login = async (req, res) => {
         email: existingUser?.email,
         userId: existingUser?._id,
         phoneNumber: existingUser?.phoneNumber,
+        isAdmin:existingUser?.isAdmin,
       },
     });
   } catch (error) {

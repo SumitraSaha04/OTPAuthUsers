@@ -5,6 +5,10 @@ const userSchema=new mongoose.Schema({
     name:String,
     email:String,
     phoneNumber:Number,
+    isAdmin:{
+        type:Boolean,
+        default:false, 
+    }
 });
 
 //create a model

@@ -4,7 +4,11 @@ import  bodyParser from 'body-parser';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import auth from "./routes/auth.js";
-import gameauth from "./routes/gameauth.js";
+import alllistings from "./routes/listings.js";
+import newlistings from "./routes/newlist.js";
+import deletelistings from "./routes/deletelisting.js";
+
+import update from "./routes/update.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -25,7 +29,11 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",auth);
-app.use("/gameauth",gameauth);
+app.use("/alllistings",alllistings);
+app.use("/newlistings",newlistings);
+app.use("/deletelistings",deletelistings);
+app.use("/update",update);
+
 
 app.listen(PORT,()=>{
     console.log(`Server is running on PORT ${PORT}`)

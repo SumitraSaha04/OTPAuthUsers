@@ -6,7 +6,8 @@ export const validAuthentication = (req, res, next) => {
   //get the refreshToken and accessToken from cookies
   const accessToken = req.cookies["accessToken"];
   const refreshToken = req.cookies["refreshToken"];
-
+  console.log("accessToken:",req.cookies["accessToken"]);
+  console.log("refresh token",refreshToken);
   //check
   if (!accessToken && !refreshToken) {
     return res
@@ -44,22 +45,24 @@ export const validAuthentication = (req, res, next) => {
         {
         email:decoded?.email, 
         phoneNumber:decoded?.phoneNumber,
-        _id:decoded?._id
+        _id:decoded?._id,
+        isAdmin:decoded?.isAdmin,
         },
         process.env.JWT_SECRET_KEY,
         {
-          expiresIn: "5m",
+          expiresIn: "1h",
         }
       );
       const newRefreshToken = jwt.sign(
         {
         email:decoded?.email, 
         phoneNumber:decoded?.phoneNumber,
-        _id:decoded?._id
+        _id:decoded?._id,
+        isAdmin:decoded?.isAdmin,
         },
         process.env.JWT_REFRESH_KEY,
         {
-          expiresIn: "7m",
+          expiresIn: "1d",
         }
       );
 
