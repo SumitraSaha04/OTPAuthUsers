@@ -1,48 +1,57 @@
-/* Footer container */
+/* Footer base styles */
 .footer-container {
-  background-color: #eeeded;  /* Footer background */
-  color: black;                /* Text color */
+  background-color: #eeeded;
+  color: black;
   padding: 20px 0;
   text-align: center;
-  position: relative;             /* Stick to bottom */
-  bottom: 0;
-  left: 0;
   width: 100%;
-  z-index: 1000;               /* Above other content */
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
- 
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* key line for sticky footer */
 }
 
-/* Footer icons container */
+/* Make body and html fill full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The main React root must stretch full height */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Footer icons and text styling */
 .footer-icons {
   display: flex;
   justify-content: center;
-  gap: 20px;                  /* Space between icons */
-  font-size: 28px;            /* Icon size */
+  gap: 20px;
+  font-size: 28px;
   margin-bottom: 15px;
 }
 
-/* Icon hover effects */
 .footer-icons svg {
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .footer-icons svg:hover {
-  transform: scale(1.2);       /* Zoom effect */
-  color: #E1306C;              /* Instagram-like pink color on hover */
+  transform: scale(1.2);
+  color: #E1306C;
 }
 
-/* Footer text container */
 .footer-text {
   display: flex;
   justify-content: center;
-  gap: 40px;                   /* Space between text items */
+  gap: 40px;
   font-size: 14px;
-  flex-wrap: wrap;             /* Responsive for small screens */
+  flex-wrap: wrap;
 }
 
-/* Individual footer text */
 .footer-text h4 {
   margin: 0;
   cursor: pointer;
@@ -50,16 +59,15 @@
 }
 
 .footer-text h4:hover {
-  color: #E63946;             /* Red-ish hover color */
+  color: #E63946;
 }
 
-/* Optional: Responsive adjustments */
 @media (max-width: 600px) {
   .footer-text {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .footer-icons {
     gap: 15px;
     font-size: 24px;

@@ -3,6 +3,7 @@ import Navbar from "../../component/navbar/navbar";
 import "./home.css";
 import Footer from "../../component/footer/footer.jsx";
 import { useEffect, useState } from "react";
+import HotelDetailCard from "../../component/hotelDetailCard/hotelDetailCard.js";
 
 function Home() {
   const [alllistings, setAlllistings] = useState([]);
@@ -45,18 +46,20 @@ function Home() {
         <div className="listings">
           {alllistings.map((listing) => {
             console.log("Home---",listing)
+            const {id,image,title,price} = listing ?? {}
             return (
-              <div key={listing.id} className="listing-card">
-                <img src={listing.image} alt={listing.title} />
-                <h3>{listing.title}</h3>
-                <p>{listing.price}/night</p>
-                <button
-                  id="explore-hotel"
-                  onClick={() => navigate(`/listings/details/${listing._id}`)}
-                >
-                  Explore Hotel
-                </button>
-              </div>
+              // <div key={listing.id} className="listing-card">
+              //   <img src={listing.image} alt={listing.title} />
+              //   <h3>{listing.title}</h3>
+              //   <p>{listing.price}/night</p>
+              //   <button
+              //     id="explore-hotel"
+              //     onClick={() => navigate(`/listings/details/${listing._id}`)}
+              //   >
+              //     Explore Hotel
+              //   </button>
+              // </div>
+              <HotelDetailCard id={id} image={image} title={title} price={price} onClickExploreButton={() => navigate(`/listings/details/${listing._id}`)}/>
             );
           })}
         </div>
