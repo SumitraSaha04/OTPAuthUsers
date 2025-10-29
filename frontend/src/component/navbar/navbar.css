@@ -40,3 +40,138 @@
 .navbar-links a:hover {
   color: #e63946;
 }
+/* ---------- Profile section ---------- */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* Profile icon image */
+.profile-icon img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #e63946;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+/* Small hover zoom effect */
+.profile-icon img:hover {
+  transform: scale(1.05);
+}
+
+/* Three dots beside profile */
+.dots {
+  font-size: 20px;
+  margin-left: 6px;
+  color: #555;
+}
+
+/* Dropdown menu */
+.menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px 14px;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+}
+
+/* User greeting */
+.menu-user {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Buttons inside menu */
+.menu button {
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+  background-color: #c62828;
+}
+/* Profile container styling */
+.profile-container {
+  position: relative;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Profile icon and dots */
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dots {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Dropdown menu */
+.menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 12px;
+  min-width: 160px;
+  z-index: 1001;
+}
+
+/* Text + buttons inside dropdown */
+.menu-user {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.login-btn,
+.logout-btn {
+  width: 100%;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover,
+.logout-btn:hover {
+  background-color: #c62828;
+}
