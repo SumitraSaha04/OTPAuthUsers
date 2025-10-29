@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./details.css";
 import toast, { Toaster } from "react-hot-toast";
 import { addDays } from "date-fns";
+import BASE_URL from "../../../config";
 
 
 export function Details() {
@@ -18,12 +19,13 @@ export function Details() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
+  console.log("BASE_URL----",BASE_URL);
 
   useEffect(() => {
     const fetchHotelData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/alllistings/${hotelId}`,
+          `${BASE_URL}/${hotelId}`,
           {
             method: "GET",
             headers: { "Content-type": "application/json" },
@@ -48,7 +50,7 @@ export function Details() {
   }, [hotelId]);
 
   async function handleDelete() {
-    const url = `http://localhost:8080/deletelistings/${hotelId}`;
+    const url = `${BASE_URL}/${hotelId}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },

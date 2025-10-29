@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../../config";
 
 const Login = () => {
   const [phone, setPhone] = useState("");

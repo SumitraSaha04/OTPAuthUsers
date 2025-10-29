@@ -5,7 +5,7 @@ import express from "express";
 const router=express.Router();
 
 
-router.get("/",validAuthentication,listings);
+router.get("/",listings);
 router.get("/:hotelId",getSingle);
 router.get("/bookings/:userId",getBookings);
 

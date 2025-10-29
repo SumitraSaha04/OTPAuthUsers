@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-dotenv.config();
 
 export const validAuthentication = (req, res, next) => {
   //get the refreshToken and accessToken from cookies

@@ -4,6 +4,7 @@ import "./home.css";
 import Footer from "../../component/footer/footer.jsx";
 import { useEffect, useState } from "react";
 import HotelDetailCard from "../../component/hotelDetailCard/hotelDetailCard.js";
+import BASE_URL from "../../../config.js";
 
 function Home() {
   const [alllistings, setAlllistings] = useState([]);
@@ -12,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const url = "http://localhost:8080/alllistings";
+        const url = `${BASE_URL}/alllistings`;
 
         const response = await fetch(url, {
           method: "GET",
@@ -35,6 +36,8 @@ function Home() {
     };
     fetchListings();
   }, []);
+
+  console.log("base URL",BASE_URL)
 
   
   return (
