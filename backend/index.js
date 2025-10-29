@@ -25,9 +25,9 @@ console.log("--PORT--",PORT);
 app.use(express.json());
 app.use(bodyParser.json());//for parsing string from frontend
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true,
-}))
+  origin: "*",       // allow all origins
+  credentials: true, // allows cookies/authorization headers if needed
+}));
 
 app.use(cookieParser());
 app.use("/test",(req,res)=>{
