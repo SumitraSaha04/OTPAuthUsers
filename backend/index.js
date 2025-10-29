@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 const app=express();
+
 import  bodyParser from 'body-parser';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
@@ -10,8 +13,7 @@ import deletelistings from "./routes/deletelisting.js";
 
 import update from "./routes/update.js";
 
-import dotenv from "dotenv";
-dotenv.config();
+
 
 import connectdb from "./config/db.js";
 connectdb();
@@ -28,6 +30,9 @@ app.use(cors({
 }))
 
 app.use(cookieParser());
+app.use("/",(req,res)=>{
+    res.status(200).json({text:"Hello"})
+})
 app.use("/auth",auth);
 app.use("/alllistings",alllistings);
 app.use("/newlistings",newlistings);

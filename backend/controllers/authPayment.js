@@ -1,12 +1,12 @@
 
 import dotenv from "dotenv";
 import Razorpay from "razorpay";
-
+dotenv.config();
 
 
 const razorpay=new Razorpay({
-    key_id:process.env.RazorPay_id,
-    key_secret:process.env.RazorPay_secret,
+    key_id:process.env.RAZORPAY_ID,
+    key_secret:process.env.RAZORPAY_SECRET,
 });
 
 export const order=async(req,res)=>{
