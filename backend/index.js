@@ -30,7 +30,7 @@ app.use(cors({
 }))
 
 app.use(cookieParser());
-app.use("/",(req,res)=>{
+app.use("/test",(req,res)=>{
     res.status(200).json({text:"Hello"})
 })
 app.use("/auth",auth);
