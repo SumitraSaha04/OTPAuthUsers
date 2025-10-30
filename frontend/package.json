@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@googlemaps/markerclusterer": "^2.6.2",
+    "@mui/material": "^7.3.4",
     "@react-google-maps/api": "^2.20.7",
     "@vis.gl/react-google-maps": "^1.5.5",
     "date-fns": "^4.1.0",

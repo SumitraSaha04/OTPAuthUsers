@@ -33,7 +33,7 @@ const Newlist = () => {
       if (!isEdit) {
         return;
       }
-      const url = `http://localhost:8080/alllistings/${hotelId}`;
+      const url = `http://localhost:8080/api/alllistings/${hotelId}`;
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -68,8 +68,8 @@ const Newlist = () => {
   const handleAddListing = async () => {
     try {
       const url = isEdit
-        ? `http://localhost:8080/update/${hotelId}`
-        : "http://localhost:8080/newlistings/newlist";
+        ? `http://localhost:8080/api/update/${hotelId}`
+        : "http://localhost:8080/api/newlistings/newlist";
       const method = isEdit ? "PATCH" : "POST";
 
       const response = await fetch(url, {

@@ -2,12 +2,14 @@ import { useState } from "react";
 import OtpInput from "otp-input-react";
 import "./login.css";
 import { auth } from "../../firebase/firebase.config";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { RecaptchaVerifier,signInWithPhoneNumber } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import BASE_URL from "../../../config";
+import { getUserInfo } from "../../userInfo";
 
 const Login = () => {
+  const user=getUserInfo();
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
@@ -25,12 +27,12 @@ const Login = () => {
         auth,
         "recaptcha-container",
         {
-          size: "normal",
+          size: "invisible",
           callback: (response) => {
             console.log("Recaptcha Verified!", response);
           },
           "expired-callback": () => {},
-        }
+        },
       );
     }
   }
@@ -43,7 +45,7 @@ const Login = () => {
     }
 
     try {
-      const url = "http://localhost:8080/auth/login";
+      const url = "http://localhost:8080/api/auth/login";
       const response = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -61,16 +63,16 @@ const Login = () => {
       if (success) {
         toast.success("User Already Registered!");
         localStorage.setItem("user", JSON.stringify(user));
-      } else if (message=="User Not Found") {
+
+      } else if (message == "User Not Found") {
         toast.error(message);
-       
-          navigate("/signup");
-        
+
+        navigate("/signup");
       } else if (!success) {
         toast.error(message);
         return;
       }
-
+      console.log("User info from login.jsx---",data?.user);
       await onCaptchaVerify();
 
       console.log("Recaptcha completed");
@@ -81,14 +83,12 @@ const Login = () => {
 
       console.log("SEND OTP");
 
-      signInWithPhoneNumber(auth, phoneNumber, appVerifier).then(
-        (confirmationResult) => {
-          window.confirmationResult = confirmationResult;
+      signInWithPhoneNumber(auth, phoneNumber,appVerifier).then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
 
-          console.log("OTP sent");
-          toast.success("OTP Sent successfully");
-        }
-      );
+        console.log("OTP sent");
+        toast.success("OTP Sent successfully");
+      });
     } catch (error) {
       console.log(error);
       toast.error("Failed to initialize Captcha");
@@ -96,6 +96,8 @@ const Login = () => {
   }
 
   async function onOTPVerify() {
+
+    
     if (!otp || otp.length !== 6) {
       toast.error("Enter 6-digit OTP sent to valid Phone Number");
       return;
@@ -107,12 +109,15 @@ const Login = () => {
 
       console.log("--Result from onOTPVerify--", result);
 
-      const user = result.user;
+      const userInfo = result.user;
       toast.success("Phone verified successfully!");
 
-      console.log("User signed in:", user);
+      console.log("User signed in:", userInfo);
+      localStorage.setItem("user", JSON.stringify(user));
+
 
       navigate("/home");
+       window.location.reload(); 
     } catch (error) {
       console.error("OTP Verification failed:", error);
 
@@ -124,7 +129,7 @@ const Login = () => {
     <>
       <div className="login-container">
         <Toaster />
-        <div id="recaptcha-container"></div>
+
         <h1>Sign in</h1>
         <div className="login-input-container">
           <button>+91</button>
@@ -146,6 +151,7 @@ const Login = () => {
           <button onClick={onOTPVerify}>Verify OTP</button>
         </div>
       </div>
+      <div  id="recaptcha-container"></div>
     </>
   );
 };

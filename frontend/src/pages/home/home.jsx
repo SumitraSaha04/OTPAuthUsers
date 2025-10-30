@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const url = `${BASE_URL}/alllistings`;
+        const url = `${BASE_URL}/api/alllistings`;
 
         const response = await fetch(url, {
           method: "GET",
@@ -51,17 +51,7 @@ function Home() {
             console.log("Home---",listing)
             const {id,image,title,price} = listing ?? {}
             return (
-              // <div key={listing.id} className="listing-card">
-              //   <img src={listing.image} alt={listing.title} />
-              //   <h3>{listing.title}</h3>
-              //   <p>{listing.price}/night</p>
-              //   <button
-              //     id="explore-hotel"
-              //     onClick={() => navigate(`/listings/details/${listing._id}`)}
-              //   >
-              //     Explore Hotel
-              //   </button>
-              // </div>
+             
               <HotelDetailCard id={id} image={image} title={title} price={price} onClickExploreButton={() => navigate(`/listings/details/${listing._id}`)}/>
             );
           })}

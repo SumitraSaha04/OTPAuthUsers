@@ -1,54 +1,80 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import { FaAirbnb } from "react-icons/fa";
-import Cookies from "js-cookie";
-import { useState ,useEffect} from "react";
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../../config";
+
+
 
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [showMenu, setShowMenu] = useState(false);
-  const navigate=useNavigate();
-const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const location = useLocation();
 
   useEffect(() => {
-   const user = JSON.parse(localStorage.getItem("user"));
-
-    const accessToken = Cookies.get("accessToken");
-    const refreshToken = Cookies.get("refreshToken");
-
-    if (user && accessToken && refreshToken) {
-      try {
-        setIsLoggedIn(true);
-        setUserEmail(user?.email || "User");
-       
-      } catch (err) {
-        console.log("Error from navbar---", err);
+  const checkAuth = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/auth/me`, {
+        method: "GET",
+        credentials: "include", 
+      });
+      console.log(res.ok);
+      if (!res.ok) {
+        // not logged in
         setIsLoggedIn(false);
+        setUserPhoneNumber(null);
+        return;
       }
-    } else {
+
+      const data = await res.json();
+      console.log("hi there 2",data);
+
+     
+
+      setIsLoggedIn(true);
+      setUserPhoneNumber(data.phoneNumber || "User");
+    } catch (err) {
+      console.error("Error checking auth:", err);
       setIsLoggedIn(false);
+      setUserPhoneNumber(null);
     }
-  }, []);
+  };
 
-  const handleLogin=()=>{
+  checkAuth();
+}, [location]);
+
+
+  const handleLogin = () => {
     navigate("/login");
-  }
+  };
 
-  const handleLogout=()=>{
-    Cookies.remove("accessToken",{path:"/"});
-    Cookies.remove("refreshToken",{path:"/"});
-    localStorage.removeItem("user");
-
-    setIsLoggedIn(false);
-    setUserEmail("");
-    setShowMenu(false);
-
-    navigate("/login");
-  }
-
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.removeItem("user");
+        setIsLoggedIn(false);
+        setUserPhoneNumber("");
+        setShowMenu(false);
+        navigate("/login");
+      } else {
+        console.log("Logout Failed ", data.message);
+      }
+    } catch (error) {
+      console.error("Error Logging out:", error);
+    }
+  };
+  console.log("Userphone number---", userPhoneNumber);
   return (
     <>
       <div className="navbar-container">
@@ -64,31 +90,30 @@ const user = JSON.parse(localStorage.getItem("user"));
         </div>
 
         <div className="profile-container">
-            <div className="profile-icon"
-            onClick={()=>setShowMenu(!showMenu)}>
-                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="Profile Icon" className="profile-icon"/>
-                <span className="dots">⋮</span>
+          <div className="profile-icon" onClick={() => setShowMenu(!showMenu)}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
+              alt="Profile Icon"
+              className="profile-icon"
+            />
+          </div>
+
+          {showMenu && (
+            <div className="menu">
+              {isLoggedIn ? (
+                <>
+                  <p className="menu-user">+91 {userPhoneNumber}</p>
+                  <button className="logout-btn" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <button className="login-btn" onClick={handleLogin}>
+                  Login
+                </button>
+              )}
             </div>
-
-            {
-                showMenu && (
-                    <div className="menu">
-                        {isLoggedIn ?(
-                            <>
-                            <p className="menu-user">Hello ! {userEmail}</p>
-                            <button className="logout-btn" onClick={handleLogout}>
-                                Logout
-                            </button>
-                            </>
-                        ):(
-                            <button className="login-btn" onClick={handleLogin}>
-                                Login
-                            </button>
-                        )}
-
-                        </div>
-                )
-            }
+          )}
         </div>
       </div>
     </>

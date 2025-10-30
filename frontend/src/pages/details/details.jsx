@@ -17,6 +17,7 @@ export function Details() {
     },
   ]);
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log("User from details.jsx--",user);
 
   const navigate = useNavigate();
   console.log("BASE_URL----",BASE_URL);
@@ -25,7 +26,7 @@ export function Details() {
     const fetchHotelData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/${hotelId}`,
+          `${BASE_URL}/api/alllistings/${hotelId}`,
           {
             method: "GET",
             headers: { "Content-type": "application/json" },

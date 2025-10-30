@@ -53,7 +53,7 @@ export function Reserve() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/newlistings/create-order",
+        "http://localhost:8080/api/newlistings/create-order",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ export function Reserve() {
           key: "rzp_test_RMCjzj2zhsQIAt", // Replace with your Razorpay key
           amount: order.amount,
           currency: order.currency,
-          name: "Wandurlust",
+          name: "Wanderlust",
           description: `${hotelDetail.title} - ${nights} Nights`,
           order_id: order.id,
           handler: async function (res) {
@@ -101,7 +101,7 @@ export function Reserve() {
               console.log("Booking Payload →", bookingData);
 
               const bookingRes = await fetch(
-                `http://localhost:8080/newlistings/bookings/${userId}`,
+                `http://localhost:8080/api/newlistings/bookings/${userId}`,
                 {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },

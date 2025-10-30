@@ -15,7 +15,7 @@ export function Mybookings() {
     if (!userId) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/alllistings/bookings/${userId}`);
+      const res = await fetch(`http://localhost:8080/api/alllistings/bookings/${userId}`);
       const data = await res.json();
       setBookings(data.bookings || []);
     } catch (err) {
@@ -33,7 +33,7 @@ export function Mybookings() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/updateBookings/bookings/${bookingId}`,
+        `http://localhost:8080/api/update/bookings/${bookingId}`,
         {
           method: "PUT", 
           headers: { "Content-type": "application/json" },

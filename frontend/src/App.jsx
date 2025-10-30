@@ -22,9 +22,9 @@ function App() {
      
      <div>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Home/>} />
+          {user?.phoneNumber &&  < Route path="/home"element={<Home/>}/>}
           <Route path="/login" element={<Login />} />
-          {user?.phoneNumber  && <Route path="/home" element={<Home/>} />}
           <Route path="/signup" element={<Signup/>} />
           <Route path="/game" element={<Game/>}></Route>
           <Route path="/listings/new" element={<Newlist/>}/>
