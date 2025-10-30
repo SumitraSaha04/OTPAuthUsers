@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "./signup.css"
+import BASE_URL from "../../../config";
 
 const Signup = () => {
     const [signupInfo,setSignupInfo]=useState({
@@ -34,7 +35,7 @@ const Signup = () => {
         }
 
         try{
-            const url="http://localhost:8080/api/auth/signup";
+            const url=`${BASE_URL}/api/auth/signup`;
             const response=await fetch(url,{
                 method:"POST",
                 credentials:"include",

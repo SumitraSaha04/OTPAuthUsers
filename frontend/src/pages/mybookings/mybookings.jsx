@@ -3,6 +3,7 @@ import Navbar from "../../component/navbar/navbar.jsx";
 import "./mybookings.css";
 import toast, { Toaster } from "react-hot-toast";
 import Footer from "../../component/footer/footer.jsx";
+import BASE_URL from "../../../config.js";
 
 export function Mybookings() {
   const [bookings, setBookings] = useState([]);
@@ -15,7 +16,7 @@ export function Mybookings() {
     if (!userId) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/alllistings/bookings/${userId}`);
+      const res = await fetch(`${BASE_URL}/api/alllistings/bookings/${userId}`);
       const data = await res.json();
       setBookings(data.bookings || []);
     } catch (err) {
@@ -33,7 +34,7 @@ export function Mybookings() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/update/bookings/${bookingId}`,
+        `${BASE_URL}/api/update/bookings/${bookingId}`,
         {
           method: "PUT", 
           headers: { "Content-type": "application/json" },

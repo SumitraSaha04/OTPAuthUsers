@@ -51,7 +51,7 @@ export function Details() {
   }, [hotelId]);
 
   async function handleDelete() {
-    const url = `${BASE_URL}/${hotelId}`;
+    const url = `${BASE_URL}/api/deletelistings/${hotelId}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },

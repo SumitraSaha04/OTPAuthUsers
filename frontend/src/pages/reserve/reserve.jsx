@@ -8,6 +8,7 @@ import "react-date-range/dist/theme/default.css";
 import "./reserve.css";
 import Footer from "../../component/footer/footer";
 import Navbar from "../../component/navbar/navbar";
+import BASE_URL from "../../../config";
 
 export function Reserve() {
   const location = useLocation();
@@ -53,7 +54,7 @@ export function Reserve() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/newlistings/create-order",
+        `${BASE_URL}/api/newlistings/create-order`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -101,7 +102,7 @@ export function Reserve() {
               console.log("Booking Payload →", bookingData);
 
               const bookingRes = await fetch(
-                `http://localhost:8080/api/newlistings/bookings/${userId}`,
+                `${BASE_URL}/api/newlistings/bookings/${userId}`,
                 {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },

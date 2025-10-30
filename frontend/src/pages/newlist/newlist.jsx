@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./newlist.css";
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import BASE_URL from "../../../config";
 
 const Newlist = () => {
   const { hotelId } = useParams();
@@ -33,7 +34,7 @@ const Newlist = () => {
       if (!isEdit) {
         return;
       }
-      const url = `http://localhost:8080/api/alllistings/${hotelId}`;
+      const url = `${BASE_URL}/api/alllistings/${hotelId}`;
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -68,8 +69,8 @@ const Newlist = () => {
   const handleAddListing = async () => {
     try {
       const url = isEdit
-        ? `http://localhost:8080/api/update/${hotelId}`
-        : "http://localhost:8080/api/newlistings/newlist";
+        ? `${BASE_URL}/api/update/${hotelId}`
+        : `${BASE_URL}/api/newlistings/newlist`;
       const method = isEdit ? "PATCH" : "POST";
 
       const response = await fetch(url, {
