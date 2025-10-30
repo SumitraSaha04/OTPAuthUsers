@@ -1,6 +1,7 @@
 import User from "../model/user.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { useRouteError } from "react-router-dom";
 
 export const signup = async (req, res) => {
   try {
@@ -154,3 +155,50 @@ export const login = async (req, res) => {
     });
   }
 };
+
+
+export const logout=async(req,res)=>{
+  try{
+    res.clearCookie("accessToken",{
+      httpOnly:true,
+      sameSite:"strict",
+      secure:false,
+    });
+
+    res.clearCookie("refreshToken",{
+      httpOnly:true,
+      sameSite:"strict",
+      secure:false,
+    });
+
+    res.status(200).json({
+      message:"Logout Successful",
+      success:true,
+    });
+    
+
+  }catch(error){
+      console.error("Error in logout:",error);
+
+      res.status(500).json({
+        message:"Internal Server Error",
+        success:false,
+      });
+  }
+};
+
+// changes made here
+export const verifyme = async(req,res)=>{
+  const token = req.cookies["accessToken"];
+  console.log("this is verify token"+token);
+  if (!token) return res.status(401).json({ message: "No token" });
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    console.log("hi i am user",user)
+    console.log(user?.phoneNumber);
+    return res.status(200).json({ phoneNumber: user?.phoneNumber });
+  } catch {
+    res.status(400).json({ message: "Invalid token" });
+  }
+}
