@@ -1,7 +1,6 @@
 import User from "../model/user.js";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-import { useRouteError } from "react-router-dom";
+
 
 export const signup = async (req, res) => {
   try {
