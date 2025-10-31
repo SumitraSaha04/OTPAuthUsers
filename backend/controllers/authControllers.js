@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
     if (existingUser) {
       return res
         .status(409)
-        .json({ message: "User already Exist", success: false });
+        .json({ message: "User already Exist", success: true });
     }
     //create new document
     const newUser = new User({ name, email, phoneNumber });
@@ -48,14 +48,16 @@ export const signup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false,
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("accessToken", token, {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false,
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 1000,
     });
 
 
@@ -70,7 +72,7 @@ export const signup = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "Internal Server Error",
-      success: false,
+      success: true,
       error: err.message,
     });
   }
@@ -83,7 +85,7 @@ export const login = async (req, res) => {
     if (!phoneNumber) {
       return res.status(400).json({
         message: "Phone number is required",
-        success: false,
+        success: true,
       });
     }
     const existingUser = await User.findOne({ phoneNumber }); //got full user details
@@ -124,14 +126,16 @@ export const login = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false,
+      sameSite: "none",
+      secure: true,
+      maxAge: 7*24*60 * 60 * 1000,
     });
 
     res.cookie("accessToken", token, {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false,
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -160,14 +164,14 @@ export const logout=async(req,res)=>{
   try{
     res.clearCookie("accessToken",{
       httpOnly:true,
-      sameSite:"strict",
-      secure:false,
+      sameSite:"none",
+      secure:true,
     });
 
     res.clearCookie("refreshToken",{
       httpOnly:true,
-      sameSite:"strict",
-      secure:false,
+      sameSite:"none",
+      secure:true,
     });
 
     res.status(200).json({

@@ -12,6 +12,7 @@ const Login = () => {
   const user=getUserInfo();
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpSent,setOtpSent]=useState(false);
   const navigate = useNavigate();
 
   const handleChangePhoneno = (e) => {
@@ -88,6 +89,7 @@ const Login = () => {
 
         console.log("OTP sent");
         toast.success("OTP Sent successfully");
+        setOtpSent(true);
       });
     } catch (error) {
       console.log(error);
@@ -147,8 +149,8 @@ const Login = () => {
         </div>
 
         <div className="login-get-otp-btn">
-          <button onClick={onSignup}>GET OTP</button>
-          <button onClick={onOTPVerify}>Verify OTP</button>
+          {!otpSent && (<button onClick={onSignup}>GET OTP</button>)}
+          {otpSent && (<button onClick={onOTPVerify}>Verify OTP</button>)}
         </div>
       </div>
       <div  id="recaptcha-container"></div>
