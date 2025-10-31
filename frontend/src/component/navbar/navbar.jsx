@@ -5,6 +5,7 @@ import { FaAirbnb } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BASE_URL from "../../../config";
+import Logout from "../logout/logout";
 
 
 
@@ -103,9 +104,7 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <>
                   <p className="menu-user">+91 {userPhoneNumber}</p>
-                  <button className="logout-btn" onClick={handleLogout}>
-                    Logout
-                  </button>
+                 <Logout handleLogout={handleLogout}/>
                 </>
               ) : (
                 <button className="login-btn" onClick={handleLogin}>

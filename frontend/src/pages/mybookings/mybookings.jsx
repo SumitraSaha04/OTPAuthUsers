@@ -9,7 +9,7 @@ export function Mybookings() {
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
 
-  // Fetch bookings
+
   const fetchBookings = async () => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const userId = userInfo?.userId;

@@ -1,0 +1,23 @@
+.logout-dialog {
+  border-radius: 12px !important;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logout-title {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+
+.logout-content {
+  padding: 10px 24px !important;
+}
+
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding-bottom: 20px !important;
+}
