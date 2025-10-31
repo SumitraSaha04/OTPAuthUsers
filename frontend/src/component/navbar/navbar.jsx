@@ -67,7 +67,7 @@ const Navbar = () => {
         setIsLoggedIn(false);
         setUserPhoneNumber("");
         setShowMenu(false);
-        navigate("/login");
+        navigate("/");
       } else {
         console.log("Logout Failed ", data.message);
       }
