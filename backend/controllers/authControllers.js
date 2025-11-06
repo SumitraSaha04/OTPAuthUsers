@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
     if (existingUser) {
       return res
         .status(409)
-        .json({ message: "User already Exist", success: true });
+        .json({ message: "User already Exist", success:false });
     }
     //create new document
     const newUser = new User({ name, email, phoneNumber });
@@ -45,20 +45,21 @@ export const signup = async (req, res) => {
     );
 
     res.header("Access-Control-Allow-Credentials", "true");
+     res.cookie("accessToken", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 1000,
+    });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       sameSite: "none",
       secure: true,
-      maxAge: 60 * 60 * 1000,
+      maxAge: 24*60 * 60 * 1000,
     });
 
-    res.cookie("accessToken", token, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-      maxAge: 60 * 60 * 1000,
-    });
+   
 
 
 
@@ -72,7 +73,7 @@ export const signup = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "Internal Server Error",
-      success: true,
+      success: false,
       error: err.message,
     });
   }
@@ -85,7 +86,7 @@ export const login = async (req, res) => {
     if (!phoneNumber) {
       return res.status(400).json({
         message: "Phone number is required",
-        success: true,
+        success: false,
       });
     }
     const existingUser = await User.findOne({ phoneNumber }); //got full user details
@@ -123,20 +124,21 @@ export const login = async (req, res) => {
     );
 
     res.header("Access-Control-Allow-Credentials", "true");
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-      maxAge: 7*24*60 * 60 * 1000,
-    });
-
+    
     res.cookie("accessToken", token, {
       httpOnly: true,
       sameSite: "none",
       secure: true,
       maxAge: 60 * 60 * 1000,
     });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge:24*60 * 60 * 1000,
+    });
+
 
     res.status(200).json({
       message: "Login Successful",
@@ -192,16 +194,18 @@ export const logout=async(req,res)=>{
 
 // changes made here
 export const verifyme = async(req,res)=>{
-  const token = req.cookies["accessToken"];
-  console.log("this is verify token"+token);
-  if (!token) return res.status(401).json({ message: "No token" });
+   try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
 
-  try {
-    const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    console.log("hi i am user",user)
-    console.log(user?.phoneNumber);
-    return res.status(200).json({ phoneNumber: user?.phoneNumber });
-  } catch {
-    res.status(400).json({ message: "Invalid token" });
+    res.status(200).json({
+      success: true,
+      phoneNumber: req.user.phoneNumber,
+     
+    });
+  } catch (error) {
+    console.error("Error in verifyme:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }

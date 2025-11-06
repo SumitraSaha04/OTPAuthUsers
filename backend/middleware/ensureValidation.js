@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+
 
 export const validAuthentication = (req, res, next) => {
   //get the refreshToken and accessToken from cookies
@@ -65,22 +65,24 @@ export const validAuthentication = (req, res, next) => {
         }
       );
 
-      res.cookie("refreshToken",newRefreshToken,{
-        httpOnly:true,
-        sameSite:"none",
-        secure:true,
-        maxAge: 7*24 *60 * 60 * 1000,
-        
-
-      });
-
-      res.cookie("accessToken",newAccessToken,{
+       res.cookie("accessToken",newAccessToken,{
         httpOnly:true,
         sameSite:"none",
         secure:true,
         maxAge: 60 * 60 * 1000,
 
       });
+
+      res.cookie("refreshToken",newRefreshToken,{
+        httpOnly:true,
+        sameSite:"none",
+        secure:true,
+        maxAge: 24 *60 * 60 * 1000,
+        
+
+      });
+
+     
 
       req.user=decoded;
       console.log("req.user from middleware--",req.user);
