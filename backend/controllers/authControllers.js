@@ -1,7 +1,7 @@
 import User from "../model/user.js";
 import jwt from "jsonwebtoken";
 
-
+const isProduction=process.env.NODE_ENV==="production";
 export const signup = async (req, res) => {
   try {
     const { name, email, phoneNumber } = req.body;
@@ -127,15 +127,15 @@ export const login = async (req, res) => {
     
     res.cookie("accessToken", token, {
       httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      sameSite: isProduction?"none":"lax",
+      secure: isProduction,
       maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      sameSite: isProduction?"none":"lax",
+      secure: isProduction,
       maxAge:24*60 * 60 * 1000,
     });
 
@@ -166,14 +166,14 @@ export const logout=async(req,res)=>{
   try{
     res.clearCookie("accessToken",{
       httpOnly:true,
-      sameSite:"none",
-      secure:true,
+      sameSite: isProduction?"none":"lax",
+      secure: isProduction,
     });
 
     res.clearCookie("refreshToken",{
       httpOnly:true,
-      sameSite:"none",
-      secure:true,
+     sameSite: isProduction?"none":"lax",
+      secure: isProduction,
     });
 
     res.status(200).json({

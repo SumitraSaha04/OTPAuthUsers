@@ -1,12 +1,11 @@
 import jwt from "jsonwebtoken";
 
-
 export const validAuthentication = (req, res, next) => {
   //get the refreshToken and accessToken from cookies
   const accessToken = req.cookies["accessToken"];
   const refreshToken = req.cookies["refreshToken"];
-  console.log("accessToken:",req.cookies["accessToken"]);
-  console.log("refresh token",refreshToken);
+  console.log("accessToken:", req.cookies["accessToken"]);
+  console.log("refresh token", refreshToken);
   //check
   if (!accessToken && !refreshToken) {
     return res
@@ -42,10 +41,10 @@ export const validAuthentication = (req, res, next) => {
       //Now generate newAccessToken
       const newAccessToken = jwt.sign(
         {
-        email:decoded?.email, 
-        phoneNumber:decoded?.phoneNumber,
-        _id:decoded?._id,
-        isAdmin:decoded?.isAdmin,
+          email: decoded?.email,
+          phoneNumber: decoded?.phoneNumber,
+          _id: decoded?._id,
+          isAdmin: decoded?.isAdmin,
         },
         process.env.JWT_SECRET_KEY,
         {
@@ -54,10 +53,10 @@ export const validAuthentication = (req, res, next) => {
       );
       const newRefreshToken = jwt.sign(
         {
-        email:decoded?.email, 
-        phoneNumber:decoded?.phoneNumber,
-        _id:decoded?._id,
-        isAdmin:decoded?.isAdmin,
+          email: decoded?.email,
+          phoneNumber: decoded?.phoneNumber,
+          _id: decoded?._id,
+          isAdmin: decoded?.isAdmin,
         },
         process.env.JWT_REFRESH_KEY,
         {
@@ -65,30 +64,24 @@ export const validAuthentication = (req, res, next) => {
         }
       );
 
-       res.cookie("accessToken",newAccessToken,{
-        httpOnly:true,
-        sameSite:"none",
-        secure:true,
+      res.cookie("accessToken", newAccessToken, {
+        httpOnly: true,
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
         maxAge: 60 * 60 * 1000,
-
       });
 
-      res.cookie("refreshToken",newRefreshToken,{
-        httpOnly:true,
-        sameSite:"none",
-        secure:true,
-        maxAge: 24 *60 * 60 * 1000,
-        
-
+      res.cookie("refreshToken", newRefreshToken, {
+        httpOnly: true,
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
+        maxAge: 24 * 60 * 60 * 1000,
       });
 
-     
-
-      req.user=decoded;
-      console.log("req.user from middleware--",req.user);
+      req.user = decoded;
+      console.log("req.user from middleware--", req.user);
 
       next();
-      
     } catch (error) {
       console.log("Error in Refresh Token--", error.message);
 
