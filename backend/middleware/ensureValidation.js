@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const validAuthentication = (req, res, next) => {
+  const isProduction=process.env.NODE_ENV==="production";
   //get the refreshToken and accessToken from cookies
   const accessToken = req.cookies["accessToken"];
   const refreshToken = req.cookies["refreshToken"];
@@ -86,7 +87,7 @@ export const validAuthentication = (req, res, next) => {
       console.log("Error in Refresh Token--", error.message);
 
       return res
-        .status(400)
+        .status(401)
         .json({ message: "Error in refreshToken", success: false });
     }
   }

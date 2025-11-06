@@ -25,7 +25,7 @@ const Navbar = () => {
         method: "GET",
         credentials: "include", 
       });
-      console.log(res.ok);
+      console.log("res.ok from navbar--",res.ok);
       if (!res.ok) {
         // not logged in
         setIsLoggedIn(false);
